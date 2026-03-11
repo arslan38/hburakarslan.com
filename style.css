@@ -11,6 +11,11 @@
   color: #e06030;
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -23,6 +28,7 @@ body {
   line-height: 1.7;
   padding: 2rem;
   -webkit-font-smoothing: antialiased;
+  animation: fadeIn 0.4s ease-out;
 }
 
 main {
@@ -136,14 +142,23 @@ em {
   .projects-layout {
     flex-direction: column;
     align-items: flex-start;
+    padding: 2rem;
+    height: auto;
+    overflow: visible;
+  }
+
+  .projects-layout main {
+    max-width: 640px;
+    width: 100%;
   }
 
   .cards {
     width: 100%;
   }
 
-  .card {
+  .project-img {
     width: 100%;
+    max-height: none;
   }
 }
 
@@ -153,6 +168,25 @@ em {
   left: 1.5rem;
   font-size: inherit;
   color: #aaa;
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 0.85rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  footer {
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: 0.8em;
+  }
+
+  .copyright {
+    position: static;
+    margin-top: 2.5rem;
+  }
 }
 
 .signature {
