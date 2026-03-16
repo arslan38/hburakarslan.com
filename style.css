@@ -131,17 +131,19 @@ em {
 
 em[data-bubble] {
   cursor: pointer;
+  padding: 0.4em 0.25em;
+  margin: -0.4em -0.25em;
 }
 
 /* Glow pulse hint animation */
 @keyframes glowPulse {
   0%   { text-shadow: 0 0 0 transparent; }
   50%  { text-shadow: 0 0 8px rgba(224, 96, 48, 0.6), 0 0 16px rgba(224, 96, 48, 0.3); }
-  100% { text-shadow: 0 0 0 transparent; }
+  100% { text-shadow: 0 0 5px rgba(224, 96, 48, 0.35), 0 0 10px rgba(224, 96, 48, 0.15); }
 }
 
 em[data-bubble].glow-hint {
-  animation: glowPulse 1s ease-in-out 1;
+  animation: glowPulse 1s ease-in-out 1 forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {

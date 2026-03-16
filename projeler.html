@@ -14,9 +14,9 @@
 <body>
   <div class="projects-layout">
     <main>
-      <p>Bir şeyleri sadece tüketmek yetmiyor, <em>üretmek</em> lazım. Yandaki projeler tam da bu dürtüyle ortaya çıktı. Her biri farklı bir problemin peşinde koşarken öğrendiğim şeylerin birer <em>yansıması</em>.</p>
+      <p>Bir şeyleri sadece tüketmek yetmiyor, <em data-bubble="uretmek">üretmek</em> lazım. Yandaki projeler tam da bu dürtüyle ortaya çıktı. Her biri farklı bir problemin peşinde koşarken öğrendiğim şeylerin birer <em data-bubble="yansimasi">yansıması</em>.</p>
 
-      <p>Şu an enerjimin büyük kısmı <a href="https://sor.bi" target="_blank" style="color:#1FA4FF;text-decoration:none"><em>Sorbi'ye</em></a> gidiyor. Eğitimi daha erişilebilir, daha <em>insani</em> kılmak için yapay zekayı içselleştirmiş bir çözüm inşaa ediyoruz. Ama arada <em>başka şeyler</em> de çıkıyor tabii:)</p>
+      <p>Şu an enerjimin büyük kısmı Sorbi'ye gidiyor. Eğitimi daha erişilebilir, daha insani kılmak için yapay zekayı içselleştirmiş bir çözüm inşaa ediyoruz. Ama arada <em data-bubble="baskaseyler">başka şeyler</em> de çıkıyor tabii:)</p>
 
       <footer>
         <div class="links">
@@ -33,6 +33,136 @@
       </a>
     </div>
   </div>
+  <div id="speech-bubble" class="speech-bubble" role="tooltip" aria-hidden="true">
+    <div class="speech-bubble__content"></div>
+    <div class="speech-bubble__arrow"></div>
+  </div>
   <p class="copyright">© 2026 Hüzeyfe Burak Arslan</p>
+  <script type="module">
+    import { animate } from 'https://cdn.jsdelivr.net/npm/motion@11/mini/+esm';
+
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const BUBBLE_DATA = {
+      uretmek:     { type: 'quote', text: 'The best way to predict the future is to create it.', attribution: 'Peter Drucker' },
+      yansimasi:   { type: 'emoji', text: '🪞✨' },
+      baskaseyler: { type: 'emoji', text: '🤫' },
+    };
+
+    function renderBubbleContent(data) {
+      switch (data.type) {
+        case 'quote':
+          return `<p class="bubble-quote">"${data.text}"</p>` +
+            (data.attribution ? `<p class="bubble-attribution">— ${data.attribution}</p>` : '');
+        case 'emoji':
+          return `<p class="bubble-emoji">${data.text}</p>`;
+        case 'note':
+          return `<p class="bubble-note">${data.text}</p>`;
+        default:
+          return '';
+      }
+    }
+
+    const bubble = document.getElementById('speech-bubble');
+    const content = bubble.querySelector('.speech-bubble__content');
+    const arrow = bubble.querySelector('.speech-bubble__arrow');
+
+    function positionBubble(targetEl) {
+      const rect = targetEl.getBoundingClientRect();
+      const bRect = bubble.getBoundingClientRect();
+      const gap = 10, pad = 12;
+      const centerX = rect.left + rect.width / 2;
+      const placeBelow = rect.top < bRect.height + gap + pad;
+
+      let top;
+      if (placeBelow) {
+        top = rect.bottom + gap;
+        bubble.classList.add('speech-bubble--below');
+        arrow.className = 'speech-bubble__arrow speech-bubble__arrow--up';
+      } else {
+        top = rect.top - bRect.height - gap;
+        bubble.classList.remove('speech-bubble--below');
+        arrow.className = 'speech-bubble__arrow speech-bubble__arrow--down';
+      }
+
+      let left = centerX - bRect.width / 2;
+      left = Math.max(pad, Math.min(left, window.innerWidth - bRect.width - pad));
+      bubble.style.top = top + 'px';
+      bubble.style.left = left + 'px';
+
+      const arrowLeft = Math.max(12, Math.min(centerX - left, bRect.width - 12));
+      arrow.style.left = arrowLeft + 'px';
+      arrow.style.transform = 'translateX(-50%)';
+    }
+
+    let currentTarget = null, hideAnimation = null, hideTimeout = null;
+
+    function cancelPendingHide() { if (hideTimeout) { clearTimeout(hideTimeout); hideTimeout = null; } }
+
+    function showBubble(targetEl) {
+      const data = BUBBLE_DATA[targetEl.dataset.bubble];
+      if (!data) return;
+      cancelPendingHide();
+      if (hideAnimation) { hideAnimation.stop(); hideAnimation = null; }
+      content.innerHTML = renderBubbleContent(data);
+      bubble.classList.add('is-visible');
+      bubble.setAttribute('aria-hidden', 'false');
+      targetEl.setAttribute('aria-describedby', 'speech-bubble');
+      requestAnimationFrame(() => {
+        positionBubble(targetEl);
+        if (reducedMotion) { bubble.style.opacity = '1'; bubble.style.transform = 'scale(1)'; }
+        else { animate(bubble, { scale: [0.85, 1], opacity: [0, 1] }, { duration: 0.28, easing: [.34, 1.56, .64, 1] }); }
+      });
+      currentTarget = targetEl;
+    }
+
+    function hideBubble(callback) {
+      cancelPendingHide();
+      if (!currentTarget) { if (callback) callback(); return; }
+      currentTarget.removeAttribute('aria-describedby');
+      currentTarget = null;
+      if (reducedMotion) {
+        bubble.style.opacity = '0'; bubble.style.transform = 'scale(0.85)';
+        bubble.classList.remove('is-visible'); bubble.setAttribute('aria-hidden', 'true');
+        if (callback) callback(); return;
+      }
+      hideAnimation = animate(bubble, { scale: [1, 0.85], opacity: [1, 0] }, { duration: 0.2, easing: [.36, 0, .66, -.56] });
+      hideAnimation.finished.then(() => { hideAnimation = null; bubble.classList.remove('is-visible'); bubble.setAttribute('aria-hidden', 'true'); if (callback) callback(); });
+    }
+
+    function scheduleHide() { cancelPendingHide(); hideTimeout = setTimeout(() => { hideTimeout = null; hideBubble(); }, 80); }
+
+    const BUBBLES_ENABLED = false; // true yapınca popuplar aktif olur
+
+    if (BUBBLES_ENABLED) {
+      let isTouchDevice = false;
+      document.addEventListener('touchstart', () => { isTouchDevice = true; }, { once: true, passive: true });
+      bubble.addEventListener('mouseenter', () => cancelPendingHide());
+      bubble.addEventListener('mouseleave', () => { if (!isTouchDevice) scheduleHide(); });
+
+      document.querySelectorAll('em[data-bubble]').forEach(em => {
+        em.setAttribute('tabindex', '0');
+        em.addEventListener('mouseenter', () => { if (!isTouchDevice) { cancelPendingHide(); showBubble(em); } });
+        em.addEventListener('mouseleave', () => { if (!isTouchDevice) scheduleHide(); });
+        em.addEventListener('click', (e) => { if (!isTouchDevice) return; e.preventDefault(); e.stopPropagation(); currentTarget === em ? hideBubble() : hideBubble(() => showBubble(em)); });
+        em.addEventListener('focus', () => showBubble(em));
+        em.addEventListener('blur', () => hideBubble());
+      });
+
+      document.addEventListener('click', (e) => { if (currentTarget && !bubble.contains(e.target) && !e.target.closest('em[data-bubble]')) hideBubble(); });
+      document.addEventListener('scroll', () => hideBubble(), { passive: true });
+      window.addEventListener('resize', () => { if (currentTarget) positionBubble(currentTarget); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && currentTarget) { const el = currentTarget; hideBubble(); el.blur(); } });
+
+    }
+
+    if (!reducedMotion) {
+      setTimeout(() => {
+        document.querySelectorAll('em[data-bubble]').forEach((em, i) => {
+          setTimeout(() => em.classList.add('glow-hint'), i * 80);
+        });
+      }, 1500);
+    }
+  </script>
 </body>
 </html>
