@@ -123,8 +123,111 @@ em {
   transition: color 0.3s ease;
 }
 
-em:hover {
-  color: #e06030;
+@media (hover: hover) {
+  em:hover {
+    color: #e06030;
+  }
+}
+
+em[data-bubble] {
+  cursor: pointer;
+}
+
+/* Glow pulse hint animation */
+@keyframes glowPulse {
+  0%   { text-shadow: 0 0 0 transparent; }
+  50%  { text-shadow: 0 0 8px rgba(224, 96, 48, 0.6), 0 0 16px rgba(224, 96, 48, 0.3); }
+  100% { text-shadow: 0 0 0 transparent; }
+}
+
+em[data-bubble].glow-hint {
+  animation: glowPulse 1s ease-in-out 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  em[data-bubble].glow-hint {
+    animation: none;
+  }
+}
+
+/* Speech bubble */
+.speech-bubble {
+  position: fixed;
+  z-index: 1000;
+  max-width: 280px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.08);
+  padding: 0.75rem 1rem;
+  font-family: 'Noto Sans Mono', monospace;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: #1a1a1a;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform-origin: center bottom;
+}
+
+.speech-bubble.is-visible {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.speech-bubble.speech-bubble--below {
+  transform-origin: center top;
+}
+
+/* Arrow */
+.speech-bubble__arrow {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+}
+
+/* Arrow pointing down (bubble above target) */
+.speech-bubble__arrow--down {
+  bottom: -7px;
+  border-top: 7px solid #fff;
+}
+
+/* Arrow pointing up (bubble below target) */
+.speech-bubble__arrow--up {
+  top: -7px;
+  border-bottom: 7px solid #fff;
+}
+
+/* Bubble content styles */
+.bubble-quote {
+  font-style: italic;
+  margin: 0;
+}
+
+.bubble-attribution {
+  margin-top: 0.35rem;
+  font-size: 0.65rem;
+  color: #888;
+  text-align: right;
+}
+
+.bubble-emoji {
+  font-size: 1.8rem;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.bubble-note {
+  margin: 0;
+}
+
+.bubble-photo img {
+  display: block;
+  max-width: 100%;
+  border-radius: 4px;
 }
 
 .contact-item {

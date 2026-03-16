@@ -10,23 +10,22 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;500;700&family=Swanky+and+Moo+Moo&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js" defer></script>
 </head>
 <body>
   <main>
     <h1>Merhaba,</h1>
 
-    <p>Aslen İTÜ'den çıkma bir Yapay zeka mühendisi olarak işin salt teknik tarafında kalmayı oldum olası hiç sevmedim. Beni asıl heyecanlandıran şey hep bir <em>hikaye</em> peşinde koşmaktı. </p>
+    <p>Aslen İTÜ'den çıkma bir Yapay zeka mühendisi olarak işin salt teknik tarafında kalmayı oldum olası hiç sevmedim. Beni asıl heyecanlandıran şey hep bir <em data-bubble="hikaye">hikaye</em> peşinde koşmaktı. </p>
 
-    <p>Hep problemler üzerine düşündüm, hatta <em>kovaladım</em> onları. Çünkü problem, hikayenin özünde vardı. Bu yüzden de sevdim hep <em>problem çözmeyi</em>.</p>
+    <p>Hep problemler üzerine düşündüm, hatta <em data-bubble="kovaladum">kovaladım</em> onları. Çünkü problem, hikayenin özünde vardı. Bu yüzden de sevdim hep <em data-bubble="problem">problem çözmeyi</em>.</p>
 
-    <p>13 yaşımda başlayan yazılım maceram, beni önce yapay zeka mühendisliğine oradan da <em>ürün geliştirme</em> rotasına itti. Bugün geriye dönüp baktığımda hikaye arayışımın beni bu noktaya getirdiğini anlıyorum.</p>
+    <p>13 yaşımda başlayan yazılım maceram, beni önce yapay zeka mühendisliğine oradan da <em data-bubble="urun">ürün geliştirme</em> rotasına itti. Bugün geriye dönüp baktığımda hikaye arayışımın beni bu noktaya getirdiğini anlıyorum.</p>
 
     <p>Bu arayış bir mühendislik disiplini ve katma değer üretme isteği ile aynı potada eriyince kaçınılmaz bir sonda buldum kendimi: <a href="https://sor.bi" target="_blank" style="color:#1FA4FF;text-decoration:none"><em>Sorbi</em></a>.</p>
 
-    <p>Her sosyo-ekonomik arkaplandan öğrencilerin <em>samimi ve içten</em> bir yapay zekadan eğitim süreçlerinde destek alabilecekleri dijital bir <em>süper-koç</em> hayali peşinde 1 seneyi aşkın süredir <em>Sorbi'yi</em> geliştiriyoruz.  </p>
+    <p>Her sosyo-ekonomik arkaplandan öğrencilerin <em data-bubble="samimi">samimi ve içten</em> bir yapay zekadan eğitim süreçlerinde destek alabilecekleri dijital bir <em data-bubble="superkoc">süper-koç</em> hayali peşinde 1 seneyi aşkın süredir <em data-bubble="sorbiyi">Sorbi'yi</em> geliştiriyoruz.  </p>
 
-    <p>Keşke çok daha önce bulunsaydım dediğim bu eğitimi <em>demokratikleştirme</em> macerasında late co-founder olarak özellikle ürün geliştirme konusunda bilfill çalışmaktayım.</p>
+    <p>Keşke çok daha önce bulunsaydım dediğim bu eğitimi <em data-bubble="demokratik">demokratikleştirme</em> macerasında late co-founder olarak özellikle ürün geliştirme konusunda bilfill çalışmaktayım.</p>
 
     <nav class="links">
       <a href="projeler.html">projeler ↗</a>
@@ -39,22 +38,242 @@
         </svg>
       </p>
     </footer>
+    <div id="speech-bubble" class="speech-bubble" role="tooltip" aria-hidden="true">
+      <div class="speech-bubble__content"></div>
+      <div class="speech-bubble__arrow"></div>
+    </div>
   </main>
   <p class="copyright">© 2026 Hüzeyfe Burak Arslan</p>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const paths = document.querySelectorAll('.signature-svg path');
-      if (!paths.length) return;
-      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  <script type="module">
+    import { animate } from 'https://cdn.jsdelivr.net/npm/motion@11/mini/+esm';
 
-      anime({
-        targets: paths,
-        strokeDashoffset: [anime.setDashoffset, 0],
-        easing: 'easeInOutSine',
-        duration: 1400,
-        delay: 1300,
+    // ── Signature SVG animation (migrated from anime.js) ──
+    const paths = document.querySelectorAll('.signature-svg path');
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (paths.length && !reducedMotion) {
+      paths.forEach(path => {
+        const length = path.getTotalLength();
+        path.style.strokeDasharray = length;
+        path.style.strokeDashoffset = length;
       });
-    });
+      animate(paths, { strokeDashoffset: 0 }, { duration: 1.4, delay: 1.3, easing: 'ease-in-out' });
+    }
+
+    // ── Bubble data ──
+    const BUBBLE_DATA = {
+      hikaye:     { type: 'quote', text: 'Her insan ölür ama herkes gerçekten yaşamaz.', attribution: 'Braveheart' },
+      kovaladum:  { type: 'emoji', text: '🏃‍♂️💨' },
+      problem:    { type: 'quote', text: 'Fall in love with the problem, not the solution.', attribution: 'Uri Levine' },
+      urun:       { type: 'note',  text: 'İlk ürünüm 14 yaşında yaptığım bir Android uygulamasıydı.' },
+      samimi:     { type: 'emoji', text: '🫶' },
+      superkoc:   { type: 'quote', text: 'Her öğrencinin hak ettiği mentor, cebinde.' },
+      sorbiyi:    { type: 'photo', src: 'https://placehold.co/260x160?text=Sorbi' },
+      demokratik: { type: 'quote', text: 'Education is the most powerful weapon which you can use to change the world.', attribution: 'Nelson Mandela' },
+    };
+
+    // ── Render helpers ──
+    function renderBubbleContent(data) {
+      switch (data.type) {
+        case 'quote':
+          return `<p class="bubble-quote">"${data.text}"</p>` +
+            (data.attribution ? `<p class="bubble-attribution">— ${data.attribution}</p>` : '');
+        case 'emoji':
+          return `<p class="bubble-emoji">${data.text}</p>`;
+        case 'note':
+          return `<p class="bubble-note">${data.text}</p>`;
+        case 'photo':
+          return `<div class="bubble-photo"><img src="${data.src}" alt="" loading="lazy"></div>`;
+        default:
+          return '';
+      }
+    }
+
+    // ── Bubble positioning ──
+    const bubble = document.getElementById('speech-bubble');
+    const content = bubble.querySelector('.speech-bubble__content');
+    const arrow = bubble.querySelector('.speech-bubble__arrow');
+
+    function positionBubble(targetEl) {
+      const rect = targetEl.getBoundingClientRect();
+      const bRect = bubble.getBoundingClientRect();
+      const gap = 10;
+      const pad = 12;
+
+      const centerX = rect.left + rect.width / 2;
+
+      // Decide above or below
+      const spaceAbove = rect.top;
+      const placeBelow = spaceAbove < bRect.height + gap + pad;
+
+      let top;
+      if (placeBelow) {
+        top = rect.bottom + gap;
+        bubble.classList.add('speech-bubble--below');
+        arrow.className = 'speech-bubble__arrow speech-bubble__arrow--up';
+      } else {
+        top = rect.top - bRect.height - gap;
+        bubble.classList.remove('speech-bubble--below');
+        arrow.className = 'speech-bubble__arrow speech-bubble__arrow--down';
+      }
+
+      // Horizontal: center on target, clamp to viewport
+      let left = centerX - bRect.width / 2;
+      left = Math.max(pad, Math.min(left, window.innerWidth - bRect.width - pad));
+
+      bubble.style.top = top + 'px';
+      bubble.style.left = left + 'px';
+
+      // Arrow position relative to bubble
+      const arrowLeft = Math.max(12, Math.min(centerX - left, bRect.width - 12));
+      arrow.style.left = arrowLeft + 'px';
+      arrow.style.transform = 'translateX(-50%)';
+    }
+
+    // ── Show / Hide ──
+    let currentTarget = null;
+    let hideAnimation = null;
+
+    function showBubble(targetEl) {
+      const key = targetEl.dataset.bubble;
+      const data = BUBBLE_DATA[key];
+      if (!data) return;
+
+      if (hideAnimation) {
+        hideAnimation.stop();
+        hideAnimation = null;
+      }
+
+      content.innerHTML = renderBubbleContent(data);
+      bubble.classList.add('is-visible');
+      bubble.setAttribute('aria-hidden', 'false');
+      targetEl.setAttribute('aria-describedby', 'speech-bubble');
+
+      // Position after content is rendered
+      requestAnimationFrame(() => {
+        positionBubble(targetEl);
+
+        if (reducedMotion) {
+          bubble.style.opacity = '1';
+          bubble.style.transform = 'scale(1)';
+        } else {
+          animate(bubble, { scale: [0.85, 1], opacity: [0, 1] }, {
+            duration: 0.28,
+            easing: [.34, 1.56, .64, 1]
+          });
+        }
+      });
+
+      currentTarget = targetEl;
+    }
+
+    function hideBubble(callback) {
+      if (!currentTarget) { if (callback) callback(); return; }
+
+      const prev = currentTarget;
+      prev.removeAttribute('aria-describedby');
+      currentTarget = null;
+
+      if (reducedMotion) {
+        bubble.style.opacity = '0';
+        bubble.style.transform = 'scale(0.85)';
+        bubble.classList.remove('is-visible');
+        bubble.setAttribute('aria-hidden', 'true');
+        if (callback) callback();
+        return;
+      }
+
+      hideAnimation = animate(bubble, { scale: [1, 0.85], opacity: [1, 0] }, {
+        duration: 0.2,
+        easing: [.36, 0, .66, -.56]
+      });
+      hideAnimation.finished.then(() => {
+        hideAnimation = null;
+        bubble.classList.remove('is-visible');
+        bubble.setAttribute('aria-hidden', 'true');
+        if (callback) callback();
+      });
+    }
+
+    // ── Event binding ──
+    let isTouchDevice = false;
+
+    function initBubbleEvents() {
+      const targets = document.querySelectorAll('em[data-bubble]');
+
+      // Detect touch
+      document.addEventListener('touchstart', () => { isTouchDevice = true; }, { once: true, passive: true });
+
+      targets.forEach(em => {
+        // Accessibility
+        em.setAttribute('tabindex', '0');
+
+        // Desktop hover
+        em.addEventListener('mouseenter', () => {
+          if (isTouchDevice) return;
+          showBubble(em);
+        });
+        em.addEventListener('mouseleave', () => {
+          if (isTouchDevice) return;
+          hideBubble();
+        });
+
+        // Touch / click (mobile)
+        em.addEventListener('click', (e) => {
+          if (!isTouchDevice) return;
+          e.preventDefault();
+          e.stopPropagation();
+          if (currentTarget === em) {
+            hideBubble();
+          } else {
+            hideBubble(() => showBubble(em));
+          }
+        });
+
+        // Keyboard accessibility
+        em.addEventListener('focus', () => showBubble(em));
+        em.addEventListener('blur', () => hideBubble());
+      });
+
+      // Close on outside tap (mobile)
+      document.addEventListener('click', (e) => {
+        if (!currentTarget) return;
+        if (!bubble.contains(e.target) && !e.target.closest('em[data-bubble]')) {
+          hideBubble();
+        }
+      });
+
+      // Close on scroll
+      document.addEventListener('scroll', () => hideBubble(), { passive: true });
+
+      // Reposition on resize
+      window.addEventListener('resize', () => {
+        if (currentTarget) positionBubble(currentTarget);
+      });
+
+      // Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && currentTarget) {
+          const el = currentTarget;
+          hideBubble();
+          el.blur();
+        }
+      });
+    }
+
+    // ── Glow hint ──
+    function triggerGlowHint() {
+      if (reducedMotion) return;
+      setTimeout(() => {
+        document.querySelectorAll('em[data-bubble]').forEach((em, i) => {
+          setTimeout(() => em.classList.add('glow-hint'), i * 80);
+        });
+      }, 1500);
+    }
+
+    // ── Init ──
+    initBubbleEvents();
+    triggerGlowHint();
   </script>
 </body>
 </html>
