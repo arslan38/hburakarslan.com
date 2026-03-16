@@ -1,0 +1,32 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  animation: fadeIn 0.4s ease-out;
+}
+
+main {
+  max-width: 640px;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 0.85rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  footer {
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: 0.8em;
+  }
+
+  .copyright {
+    position: static;
+    margin-top: 2.5rem;
+  }
+}

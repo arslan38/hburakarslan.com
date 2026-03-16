@@ -1,0 +1,15 @@
+.signature {
+  line-height: 1;
+}
+
+.signature-svg {
+  display: block;
+  height: 5rem;
+  overflow: visible;
+  margin-left: auto;
+}
+
+.signature-svg path {
+  stroke: #1a1a1a;
+  fill: none;
+}

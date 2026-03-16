@@ -1,0 +1,33 @@
+body {
+  background-color: #fafafa;
+  color: #1a1a1a;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(0.65rem, 1vw, 0.78rem);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+p + p {
+  margin-top: 1.1em;
+}
+
+em {
+  font-family: 'Swanky and Moo Moo', cursive;
+  font-style: normal;
+  font-size: 1.5em;
+  line-height: 0;
+  vertical-align: baseline;
+  transition: color 0.3s ease;
+}
+
+@media (hover: hover) {
+  em:hover {
+    color: #1FA4FF;
+  }
+}
+
+em[data-bubble] {
+  cursor: pointer;
+  padding: 0.4em 0.25em;
+  margin: -0.4em -0.25em;
+}

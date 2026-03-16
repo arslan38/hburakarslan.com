@@ -1,0 +1,50 @@
+nav.links {
+  display: flex;
+  gap: 1.5em;
+  margin-top: 2em;
+}
+
+footer {
+  margin-top: 2em;
+}
+
+nav.links + footer {
+  margin-top: 0;
+}
+
+footer .links {
+  display: flex;
+  gap: 1.5em;
+}
+
+.links a {
+  color: #1a1a1a;
+  text-decoration: none;
+  position: relative;
+}
+
+.links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #1a1a1a;
+  transform: scaleX(1);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.links a .arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.links a:hover::after {
+  transform: scaleX(0);
+}
+
+.links a:hover .arrow {
+  transform: translate(2px, -2px);
+}

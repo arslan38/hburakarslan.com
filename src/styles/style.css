@@ -1,0 +1,14 @@
+@import './base/reset.css';
+@import './base/typography.css';
+@import './base/animations.css';
+
+@import './components/speech-bubble.css';
+@import './components/links.css';
+@import './components/signature.css';
+@import './components/copyright.css';
+
+@import './layouts/main-layout.css';
+@import './layouts/projects-layout.css';
+
+@import './pages/home.css';
+@import './pages/contact.css';

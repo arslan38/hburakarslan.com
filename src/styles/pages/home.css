@@ -1,0 +1,26 @@
+[data-page="home"] h1 {
+  font-size: inherit;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+main > h1,
+main > p {
+  opacity: 0;
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+main > h1 { animation-delay: 0.1s; }
+main > p:nth-of-type(1) { animation-delay: 0.2s; }
+main > p:nth-of-type(2) { animation-delay: 0.3s; }
+main > p:nth-of-type(3) { animation-delay: 0.4s; }
+main > p:nth-of-type(4) { animation-delay: 0.5s; }
+main > p:nth-of-type(5) { animation-delay: 0.6s; }
+main > p:nth-of-type(6) { animation-delay: 0.7s; }
+
+main > nav,
+main > footer {
+  opacity: 0;
+  animation: fadeInUp 0.5s ease-out forwards;
+  animation-delay: 0.8s;
+}

@@ -1,0 +1,32 @@
+.contact-item {
+  margin-top: 0.6em;
+}
+
+.contact-item a {
+  color: #1a1a1a;
+  text-decoration: none;
+  position: relative;
+}
+
+.contact-item a::before,
+.contact-item a::after {
+  opacity: 0.3;
+  font-size: 1.15em;
+  transition: opacity 0.25s ease;
+}
+
+.contact-item a::before {
+  content: '[';
+  margin-right: 0.15em;
+}
+
+.contact-item a::after {
+  content: ']';
+  margin-left: 0.15em;
+}
+
+.contact-item a:hover::before,
+.contact-item a:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
