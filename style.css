@@ -16,6 +16,11 @@
   to { opacity: 1; }
 }
 
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -42,6 +47,26 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
+main > h1,
+main > p {
+  opacity: 0;
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+main > h1 { animation-delay: 0.1s; }
+main > p:nth-of-type(1) { animation-delay: 0.2s; }
+main > p:nth-of-type(2) { animation-delay: 0.3s; }
+main > p:nth-of-type(3) { animation-delay: 0.4s; }
+main > p:nth-of-type(4) { animation-delay: 0.5s; }
+main > p:nth-of-type(5) { animation-delay: 0.6s; }
+main > p:nth-of-type(6) { animation-delay: 0.7s; }
+
+main > footer {
+  opacity: 0;
+  animation: fadeInUp 0.5s ease-out forwards;
+  animation-delay: 0.8s;
+}
+
 p + p {
   margin-top: 1.1em;
 }
@@ -60,12 +85,25 @@ footer {
 
 .links a {
   color: #1a1a1a;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration: none;
+  position: relative;
 }
 
-.links a:hover {
-  text-decoration-thickness: 2px;
+.links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #1a1a1a;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.links a:hover::after {
+  transform: scaleX(1);
 }
 
 em {
@@ -74,6 +112,11 @@ em {
   font-size: 1.5em;
   line-height: 0;
   vertical-align: baseline;
+  transition: color 0.3s ease;
+}
+
+em:hover {
+  color: #e06030;
 }
 
 .contact-item {
@@ -82,12 +125,25 @@ em {
 
 .contact-item a {
   color: #1a1a1a;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration: none;
+  position: relative;
 }
 
-.contact-item a:hover {
-  text-decoration-thickness: 2px;
+.contact-item a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #1a1a1a;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.contact-item a:hover::after {
+  transform: scaleX(1);
 }
 
 .projects-layout {
