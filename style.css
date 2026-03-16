@@ -72,6 +72,8 @@ em {
   font-family: 'Swanky and Moo Moo', cursive;
   font-style: normal;
   font-size: 1.5em;
+  line-height: 0;
+  vertical-align: baseline;
 }
 
 .contact-item {
