@@ -105,13 +105,22 @@ footer .links {
   width: 100%;
   height: 1px;
   background-color: #1a1a1a;
-  transform: scaleX(0);
-  transform-origin: left;
+  transform: scaleX(1);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.links a .arrow {
+  display: inline-block;
   transition: transform 0.3s ease;
 }
 
 .links a:hover::after {
-  transform: scaleX(1);
+  transform: scaleX(0);
+}
+
+.links a:hover .arrow {
+  transform: translate(2px, -2px);
 }
 
 em {
@@ -242,21 +251,27 @@ em[data-bubble].glow-hint {
   position: relative;
 }
 
+.contact-item a::before,
 .contact-item a::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: #1a1a1a;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
+  opacity: 0.3;
+  font-size: 1.15em;
+  transition: opacity 0.25s ease;
 }
 
+.contact-item a::before {
+  content: '[';
+  margin-right: 0.15em;
+}
+
+.contact-item a::after {
+  content: ']';
+  margin-left: 0.15em;
+}
+
+.contact-item a:hover::before,
 .contact-item a:hover::after {
-  transform: scaleX(1);
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .projects-layout {
