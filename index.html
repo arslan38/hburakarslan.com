@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400;500;700&family=Swanky+and+Moo+Moo&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js" defer></script>
 </head>
 <body>
   <main>
@@ -27,18 +28,33 @@
 
     <p>Keşke çok daha önce bulunsaydım dediğim bu eğitimi <em>demokratikleştirme</em> macerasında late co-founder olarak özellikle ürün geliştirme konusunda bilfill çalışmaktayım.</p>
 
+    <nav class="links">
+      <a href="projeler.html">projeler ↗</a>
+      <a href="iletisim.html">iletişim ↗</a>
+    </nav>
     <footer>
-      <div class="links">
-        <a href="projeler.html">projeler ↗</a>
-        <a href="iletisim.html">iletişim ↗</a>
-      </div>
       <p class="signature" aria-label="Hüzeyfe Burak Arslan">
-        <svg class="signature-svg" viewBox="0 0 520 65" aria-hidden="true">
-          <text x="0" y="48" class="signature-stroke">Hüzeyfe Burak Arslan</text>
+        <svg class="signature-svg" aria-hidden="true" viewBox="0 0 352 208" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M51.0883 206.328C51.0883 206.099 51.2739 200.786 60.8061 162.371C69.1172 128.878 88.6546 68.0661 98.63 35.5398C108.605 3.01352 109.493 0.898166 109.976 1.0034C110.459 1.10863 110.509 3.49856 101.996 35.7658C93.4821 68.0331 76.4033 130.105 67.6838 160.975C58.9643 191.844 59.1215 189.629 59.4907 187.1C59.8598 184.57 60.436 181.792 64.7972 168.968C69.1585 156.144 77.2873 133.359 81.9216 120.722C86.5558 108.085 87.4491 106.286 88.0949 105.885C91.4233 103.818 88.9998 117.45 81.0528 145.664C79.722 150.389 79.7446 148.623 80.2302 146.899C81.2145 143.406 82.914 140.952 83.8889 140.84C84.6685 140.75 84.3044 143.782 84.8223 144.622C85.6112 145.902 88.502 142.492 90.5394 140.395C91.1922 139.723 91.851 140.935 92.8551 141.055C100.098 141.915 104.984 132.182 107.053 131.488C111.424 130.024 109.955 139.91 111.858 141.483C116.181 145.057 126.356 141.161 135.278 137.198C136.142 136.815 133.101 135.658 110.206 134.825C87.3107 133.992 44.0176 132.972 18.9777 132.76C-6.06216 132.547 -11.5368 133.172 46.2147 127.084C103.966 120.995 225.11 108.174 350.873 94.8046" stroke="black" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </p>
     </footer>
   </main>
   <p class="copyright">© 2026 Hüzeyfe Burak Arslan</p>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const paths = document.querySelectorAll('.signature-svg path');
+      if (!paths.length) return;
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      anime({
+        targets: paths,
+        strokeDashoffset: [anime.setDashoffset, 0],
+        easing: 'easeInOutSine',
+        duration: 1400,
+        delay: 1300,
+      });
+    });
+  </script>
 </body>
 </html>
