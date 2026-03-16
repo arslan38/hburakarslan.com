@@ -8,5 +8,5 @@
 
 ::selection {
   background-color: transparent;
-  color: #1FA4FF;
+  color: var(--color-accent);
 }

@@ -10,6 +10,6 @@
 }
 
 .signature-svg path {
-  stroke: #1a1a1a;
+  stroke: var(--color-text);
   fill: none;
 }

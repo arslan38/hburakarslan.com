@@ -2,14 +2,14 @@
   position: fixed;
   z-index: 1000;
   max-width: 280px;
-  background: #fff;
+  background: var(--color-surface);
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.08);
   padding: 0.75rem 1rem;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
   line-height: 1.5;
-  color: #1a1a1a;
+  color: var(--color-text);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -37,12 +37,12 @@
 
 .speech-bubble__arrow--down {
   bottom: -7px;
-  border-top: 7px solid #fff;
+  border-top: 7px solid var(--color-surface);
 }
 
 .speech-bubble__arrow--up {
   top: -7px;
-  border-bottom: 7px solid #fff;
+  border-bottom: 7px solid var(--color-surface);
 }
 
 .bubble-quote {
@@ -53,7 +53,7 @@
 .bubble-attribution {
   margin-top: 0.35rem;
   font-size: 0.65rem;
-  color: #888;
+  color: var(--color-subtle);
   text-align: right;
 }
 

@@ -1,0 +1,14 @@
+:root {
+  /* Core palette */
+  --color-bg:      #f0efe9;
+  --color-surface: #fff;
+  --color-text:    #242323;
+  --color-muted:   #aaa;
+  --color-subtle:  #888;
+  --color-accent:  #1FA4FF;
+
+  /* Semantic aliases */
+  --color-link:         var(--color-text);
+  --color-link-hover:   var(--color-bg);
+  --color-link-hover-bg: var(--color-text);
+}

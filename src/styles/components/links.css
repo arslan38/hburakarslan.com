@@ -18,22 +18,12 @@ footer .links {
 }
 
 .links a {
-  color: #1a1a1a;
+  color: var(--color-link);
   text-decoration: none;
   position: relative;
-}
-
-.links a::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: #1a1a1a;
-  transform: scaleX(1);
-  transform-origin: right;
-  transition: transform 0.3s ease;
+  padding: 0.15em 0.35em;
+  margin: -0.15em -0.35em;
+  transition: color 0.25s ease, background-color 0.25s ease;
 }
 
 .links a .arrow {
@@ -41,8 +31,9 @@ footer .links {
   transition: transform 0.3s ease;
 }
 
-.links a:hover::after {
-  transform: scaleX(0);
+.links a:hover {
+  background-color: var(--color-link-hover-bg);
+  color: var(--color-link-hover);
 }
 
 .links a:hover .arrow {
