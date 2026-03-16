@@ -8,7 +8,7 @@
 
 ::selection {
   background-color: transparent;
-  color: #e06030;
+  color: #1FA4FF;
 }
 
 @keyframes fadeIn {
@@ -125,7 +125,7 @@ em {
 
 @media (hover: hover) {
   em:hover {
-    color: #e06030;
+    color: #1FA4FF;
   }
 }
 
@@ -138,8 +138,8 @@ em[data-bubble] {
 /* Glow pulse hint animation */
 @keyframes glowPulse {
   0%   { text-shadow: 0 0 0 transparent; }
-  50%  { text-shadow: 0 0 8px rgba(224, 96, 48, 0.6), 0 0 16px rgba(224, 96, 48, 0.3); }
-  100% { text-shadow: 0 0 5px rgba(224, 96, 48, 0.35), 0 0 10px rgba(224, 96, 48, 0.15); }
+  50%  { text-shadow: 0 0 8px rgba(31, 164, 255, 0.6), 0 0 16px rgba(31, 164, 255, 0.3); }
+  100% { text-shadow: 0 0 5px rgba(31, 164, 255, 0.35), 0 0 10px rgba(31, 164, 255, 0.15); }
 }
 
 em[data-bubble].glow-hint {
