@@ -17,6 +17,9 @@
   height: 1.2em;
   line-height: 1.2em;
   margin-top: 0.35em;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 700;
 }
 
 .site-header__name-slide {
@@ -38,52 +41,30 @@
 }
 
 .site-header__clock-wrapper {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-}
-
-.clock-map {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  margin-top: 0.5rem;
-  padding: 0.75rem;
-  background: var(--color-bg);
-  border: 1.25px solid var(--color-text);
-  border-radius: 4px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-4px);
-  transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
-  pointer-events: none;
-}
-
-.site-header__clock-wrapper:hover .clock-map {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
 }
 
 .clock-zones {
   list-style: none;
   margin: 0;
   padding: 0;
-  min-width: 10rem;
 }
 
 .clock-zones li {
   display: flex;
-  justify-content: space-between;
-  gap: 1.5rem;
+  justify-content: flex-end;
+  gap: 0.5rem;
   font-size: 0.7rem;
   line-height: 1;
-  padding: 0.25rem 0;
+  padding: 0.15rem 0;
+  opacity: 0;
+  transform: translateY(6px);
 }
 
-.clock-zones li + li {
-  border-top: 1px solid color-mix(in srgb, var(--color-text) 12%, transparent);
+.clock-zones__city {
+  color: var(--color-muted);
 }
 
 .clock-zones__diff {
@@ -105,7 +86,7 @@
     margin-bottom: 2rem;
   }
 
-  .clock-map {
+  .clock-zones {
     display: none;
   }
 }

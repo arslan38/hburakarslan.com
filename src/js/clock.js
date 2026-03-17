@@ -1,3 +1,5 @@
+import { animate } from 'motion/mini';
+
 const CAPITALS = [
   { name: 'London', tz: 'Europe/London' },
   { name: 'New York', tz: 'America/New_York' },
@@ -23,19 +25,58 @@ function diffLabel(date, tz) {
   return diffH > 0 ? `+${diffH}h` : `${diffH}h`;
 }
 
+function getDiff(date, tz) {
+  const istMs = getHourInTz(date, 'Europe/Istanbul');
+  const cityMs = getHourInTz(date, tz);
+  return Math.round((cityMs - istMs) / 3600000);
+}
+
 function renderZones() {
   const list = document.querySelector('.clock-zones');
   if (!list) return;
 
   const now = new Date();
-  list.innerHTML = CAPITALS.map(c =>
-    `<li><span>${c.name}</span><span class="clock-zones__diff">${diffLabel(now, c.tz)}</span></li>`
+  const sorted = CAPITALS.map(c => ({ ...c, diff: getDiff(now, c.tz) }))
+    .sort((a, b) => a.diff - b.diff);
+  list.innerHTML = sorted.map(c =>
+    `<li><span class="clock-zones__city">${c.name}</span><span class="clock-zones__diff">${diffLabel(now, c.tz)}</span></li>`
   ).join('');
+}
+
+let hideAnimation = null;
+
+function showZones() {
+  if (hideAnimation) { hideAnimation.cancel(); hideAnimation = null; }
+  const items = document.querySelectorAll('.clock-zones li');
+  if (!items.length) return;
+  items.forEach((li, i) => {
+    animate(li, { opacity: [0, 1], transform: ['translateY(6px)', 'translateY(0)'] }, {
+      duration: 0.3,
+      delay: i * 0.04,
+      easing: [0, 0, 0.2, 1],
+    });
+  });
+}
+
+function hideZones() {
+  const items = document.querySelectorAll('.clock-zones li');
+  if (!items.length) return;
+  const last = items.length - 1;
+  items.forEach((li, i) => {
+    const anim = animate(li, { opacity: [1, 0], transform: ['translateY(0)', 'translateY(6px)'] }, {
+      duration: 0.2,
+      delay: (last - i) * 0.03,
+      easing: [0.4, 0, 1, 1],
+    });
+    if (i === 0) hideAnimation = anim;
+  });
 }
 
 export function initClock() {
   const el = document.getElementById('site-clock');
   if (!el) return;
+
+  const wrapper = el.closest('.site-header__clock-wrapper');
 
   function update() {
     const now = new Date();
@@ -51,4 +92,9 @@ export function initClock() {
 
   update();
   setInterval(update, 10000);
+
+  if (wrapper) {
+    wrapper.addEventListener('mouseenter', showZones);
+    wrapper.addEventListener('mouseleave', hideZones);
+  }
 }
