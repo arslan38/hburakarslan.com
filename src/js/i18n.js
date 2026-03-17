@@ -58,6 +58,11 @@ export function initI18n() {
       const newLang = getLang() === 'tr' ? 'en' : 'tr';
       setLang(newLang);
       applyTranslations();
+      // innerHTML replacement destroys em[data-bubble] elements;
+      // re-apply glow-hint class to the newly created ones
+      document.querySelectorAll('em[data-bubble]').forEach(em => {
+        em.classList.add('glow-hint');
+      });
     });
   }
 
