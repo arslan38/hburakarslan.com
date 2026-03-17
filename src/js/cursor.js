@@ -1,22 +1,35 @@
 import { animate } from 'motion/mini';
 
+let resetCursor = null;
+
+export function resetCursorState() {
+  if (resetCursor) resetCursor();
+}
+
 export function initCursor() {
   if (matchMedia('(pointer: coarse)').matches) return;
 
   const cursor = document.createElement('div');
   cursor.className = 'custom-cursor';
-  cursor.innerHTML = '<span class="custom-cursor__icon"></span>';
+  cursor.innerHTML = '<span class="custom-cursor__icon"></span><span class="custom-cursor__label"></span>';
   document.body.appendChild(cursor);
+
+  const icon = cursor.querySelector('.custom-cursor__icon');
+  const label = cursor.querySelector('.custom-cursor__label');
 
   let mouseX = -100;
   let mouseY = -100;
   let cursorX = -100;
   let cursorY = -100;
   let dissolved = false;
+  let labelActive = false;
 
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
+    if (!cursor.classList.contains('is-visible')) {
+      cursor.classList.add('is-visible');
+    }
   });
 
   function tick() {
@@ -32,6 +45,7 @@ export function initCursor() {
   document.addEventListener('mouseenter', () => cursor.classList.add('is-visible'), true);
   document.addEventListener('mouseleave', () => cursor.classList.remove('is-visible'));
 
+  // Nav link dissolve
   document.addEventListener('mouseover', (e) => {
     const link = e.target.closest('.links a');
     if (!link || dissolved) return;
@@ -64,6 +78,74 @@ export function initCursor() {
     }, {
       duration: 0.4,
       easing: [0, 0, 0.2, 1],
+    });
+  });
+
+  resetCursor = () => {
+    dissolved = false;
+    labelActive = false;
+    cursor.classList.remove('has-label');
+
+    // Immediately clear animation state
+    animate(cursor, { scale: 1, x: 0, y: 0 }, { duration: 0.01 });
+    animate(icon, { opacity: 1, scale: 1 }, { duration: 0.01 });
+    animate(label, { opacity: 0 }, { duration: 0.01 });
+
+    // Hide and reappear from outside like first visit
+    cursor.classList.remove('is-visible');
+    cursorX = -100;
+    cursorY = -100;
+    animate(cursor, { opacity: 1 }, { duration: 0.01 });
+  };
+
+  // Contact link label interaction
+  document.addEventListener('mouseover', (e) => {
+    const link = e.target.closest('[data-cursor-label]');
+    if (!link || labelActive) return;
+    labelActive = true;
+
+    const text = link.dataset.cursorLabel;
+    label.textContent = text;
+
+    cursor.classList.add('has-label');
+
+    animate(icon, {
+      opacity: [1, 0],
+      scale: [1, 0.5],
+    }, {
+      duration: 0.2,
+      easing: [0.4, 0, 1, 1],
+    });
+
+    animate(label, {
+      opacity: [0, 1],
+    }, {
+      duration: 0.25,
+      easing: [0, 0, 0.2, 1],
+      delay: 0.1,
+    });
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    if (!e.target.closest('[data-cursor-label]') || !labelActive) return;
+    labelActive = false;
+
+    animate(label, {
+      opacity: [1, 0],
+    }, {
+      duration: 0.15,
+      easing: [0.4, 0, 1, 1],
+    });
+
+    animate(icon, {
+      opacity: [0, 1],
+      scale: [0.5, 1],
+    }, {
+      duration: 0.25,
+      easing: [0, 0, 0.2, 1],
+      delay: 0.08,
+    }).then(() => {
+      cursor.classList.remove('has-label');
     });
   });
 }

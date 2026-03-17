@@ -5,7 +5,19 @@
   right: 1.5rem;
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   font-size: inherit;
-  color: var(--color-muted);
+  color: var(--color-text);
   z-index: 100;
+}
+
+.site-header__clock-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.site-header__label {
+  font-size: 0.75em;
+  color: var(--color-muted);
 }

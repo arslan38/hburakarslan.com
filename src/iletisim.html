@@ -5,22 +5,24 @@
 </head>
 <body data-page="iletisim">
   {{> header}}
-  <main>
-    <p>Bir fikriniz mi var, bir şey sormak mı istiyorsunuz, yoksa sadece <em data-bubble="merhaba">merhaba</em> mı demek istiyorsunuz? Buyrun efendim.</p>
+  <div id="page-content">
+    <main>
+      <p>Bir fikriniz mi var, bir şey sormak mı istiyorsunuz, yoksa sadece <em data-bubble="merhaba">merhaba</em> mı demek istiyorsunuz? Buyrun efendim.</p>
 
-    <p>Bana e-posta ile ulaşabilirsiniz. Cevap vermek konusunda pek başarılı olduğum söylenemez, ama kendimi geliştirmeye çalışıyorum.</p>
+      <p>Bana e-posta ile ulaşabilirsiniz. Cevap vermek konusunda pek başarılı olduğum söylenemez, ama kendimi geliştirmeye çalışıyorum.</p>
 
-    <p class="contact-item">e-posta → <a href="mailto:hburak@pcdcooperation.com">hburak@pcdcooperation.com</a></p>
-    <p class="contact-item">github → <a href="https://github.com/arslan38">arslan38</a></p>
-    <p class="contact-item">linkedin → <a href="https://www.linkedin.com/in/burak-arslan-513a08173/">hburakarslan</a></p>
+      <p class="contact-item">e-posta → <a href="mailto:hburak@pcdcooperation.com" data-cursor-label="mail at">hburak@pcdcooperation.com</a></p>
+      <p class="contact-item">github → <a href="https://github.com/arslan38" data-cursor-label="profile git">arslan38</a></p>
+      <p class="contact-item">linkedin → <a href="https://www.linkedin.com/in/burak-arslan-513a08173/" data-cursor-label="profile git">hburakarslan</a></p>
 
-    <footer>
-      <div class="links">
-        <a href="/index.html">ana sayfa <span class="arrow">↗</span></a>
-      </div>
-    </footer>
-    {{> speech-bubble}}
-  </main>
+      <footer>
+        <div class="links">
+          <a href="/index.html">ana sayfa <span class="arrow">↗</span></a>
+        </div>
+      </footer>
+      {{> speech-bubble}}
+    </main>
+  </div>
   {{> copyright}}
   <script type="module" src="/js/main.js"></script>
 </body>
