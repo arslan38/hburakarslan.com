@@ -40,6 +40,64 @@
   white-space: nowrap;
 }
 
+/* Sol taraf wrapper */
+.site-header__left {
+  display: flex;
+  align-items: flex-start;
+  gap: 3em;
+  position: relative;
+}
+
+/* Nav */
+.site-header__nav {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.35em;
+  gap: 0;
+  transition: opacity 0.25s ease;
+}
+
+/* Hero'dayken nav gizle */
+.site-header--hero-visible .site-header__nav {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Nav linkleri */
+.site-header__nav a {
+  color: inherit;
+  text-decoration: none;
+  height: 1.2em;
+  line-height: 1.2em;
+  white-space: nowrap;
+  transition: color 0.25s ease, background-color 0.25s ease;
+}
+
+.site-header__nav a:hover {
+  background-color: var(--color-link-hover-bg);
+  color: var(--color-link-hover);
+}
+
+/* Hero dışında: isim overflow'unu aç, alt metni gizle, hover slide devre dışı */
+.site-header:not(.site-header--hero-visible) .site-header__name {
+  overflow: visible;
+}
+
+.site-header:not(.site-header--hero-visible) .site-header__name-alt {
+  display: none;
+}
+
+.site-header:not(.site-header--hero-visible) .site-header__name:hover .site-header__name-slide {
+  transform: none;
+}
+
+/* Mevcut sayfayı menüde gizle */
+[data-page="home"] .site-header__nav [data-nav="home"],
+[data-page="projeler"] .site-header__nav [data-nav="projeler"],
+[data-page="iletisim"] .site-header__nav [data-nav="iletisim"] {
+  display: none;
+}
+
 .site-header__clock-wrapper {
   display: flex;
   flex-direction: column;

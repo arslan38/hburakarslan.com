@@ -4,9 +4,10 @@
 
 .signature-svg {
   display: block;
-  height: 5rem;
+  height: 7rem;
   overflow: visible;
   margin-left: auto;
+  margin-top: -1.5rem;
 }
 
 .signature-svg path {

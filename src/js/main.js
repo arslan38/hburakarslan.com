@@ -5,6 +5,7 @@ import { initClock } from './clock.js';
 import { initRouter } from './router.js';
 import { initSmoothScroll } from './smooth-scroll.js';
 import { initScrollReveal, initHeroObserver } from './scroll-reveal.js';
+import { initMenu } from './menu.js';
 
 const BUBBLES_ENABLED = false;
 
@@ -13,6 +14,7 @@ initCursor();
 initClock();
 initRouter();
 initSmoothScroll();
+initMenu();
 
 // Page-specific (run on initial load)
 initSpeechBubbles(BUBBLE_DATA, { enabled: BUBBLES_ENABLED });

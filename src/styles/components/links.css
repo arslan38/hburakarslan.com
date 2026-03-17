@@ -19,7 +19,7 @@ footer .links {
 
 .links a {
   color: var(--color-link);
-  text-decoration: none;
+  text-decoration: underline;
   position: relative;
   padding: 0.15em 0.35em;
   margin: -0.15em -0.35em;
