@@ -1,4 +1,5 @@
 import { animate } from 'motion/mini';
+import sorbiSvg from '../assets/svg/sorbi.svg';
 
 let resetCursor = null;
 
@@ -11,7 +12,7 @@ export function initCursor() {
 
   const cursor = document.createElement('div');
   cursor.className = 'custom-cursor';
-  cursor.innerHTML = '<span class="custom-cursor__icon"></span><img class="custom-cursor__sorbi" src="/assets/svg/sorbi.svg" alt=""><span class="custom-cursor__label"></span>';
+  cursor.innerHTML = `<span class="custom-cursor__icon"></span><img class="custom-cursor__sorbi" src="${sorbiSvg}" alt=""><span class="custom-cursor__label"></span>`;
   document.body.appendChild(cursor);
 
   const icon = cursor.querySelector('.custom-cursor__icon');
