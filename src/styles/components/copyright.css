@@ -11,7 +11,7 @@
 [data-page="home"] .copyright {
   position: static;
   margin-top: 6rem;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 @media (max-width: 600px) {
