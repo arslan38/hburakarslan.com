@@ -23,6 +23,7 @@ export function initCursor() {
   let cursorY = -100;
   let dissolved = false;
   let labelActive = false;
+  let bubbleHover = false;
 
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
@@ -44,6 +45,44 @@ export function initCursor() {
 
   document.addEventListener('mouseenter', () => cursor.classList.add('is-visible'), true);
   document.addEventListener('mouseleave', () => cursor.classList.remove('is-visible'));
+
+  // Hide cursor on header name
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.closest('.site-header__name')) {
+      animate(cursor, { opacity: 0, scale: 0.8 }, { duration: 0.2, easing: [0.4, 0, 1, 1] });
+    }
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    if (e.target.closest('.site-header__name')) {
+      animate(cursor, { opacity: 1, scale: 1 }, { duration: 0.25, easing: [0, 0, 0.2, 1] });
+    }
+  });
+
+  // Handwritten word hide
+  document.addEventListener('mouseover', (e) => {
+    if (!e.target.closest('[data-bubble]') || bubbleHover) return;
+    bubbleHover = true;
+    animate(cursor, {
+      scale: [1, 1.15, 0],
+      opacity: [1, 0.8, 0],
+    }, {
+      duration: 0.35,
+      easing: [0.4, 0, 1, 1],
+    });
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    if (!e.target.closest('[data-bubble]') || !bubbleHover) return;
+    bubbleHover = false;
+    animate(cursor, {
+      scale: [0, 0.6, 1],
+      opacity: [0, 0.5, 1],
+    }, {
+      duration: 0.4,
+      easing: [0, 0, 0.2, 1],
+    });
+  });
 
   // Nav link dissolve
   document.addEventListener('mouseover', (e) => {
@@ -84,6 +123,7 @@ export function initCursor() {
   resetCursor = () => {
     dissolved = false;
     labelActive = false;
+    bubbleHover = false;
     cursor.classList.remove('has-label');
 
     // Immediately clear animation state

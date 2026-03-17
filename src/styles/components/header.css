@@ -11,6 +11,32 @@
   z-index: 100;
 }
 
+.site-header__name {
+  display: inline-block;
+  overflow: hidden;
+  height: 1.2em;
+  line-height: 1.2em;
+  margin-top: 0.35em;
+}
+
+.site-header__name-slide {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.site-header__name:hover .site-header__name-slide {
+  transform: translateY(-1.2em);
+}
+
+.site-header__name-primary,
+.site-header__name-alt {
+  display: block;
+  height: 1.2em;
+  line-height: 1.2em;
+  white-space: nowrap;
+}
+
 .site-header__clock-wrapper {
   display: flex;
   flex-direction: column;

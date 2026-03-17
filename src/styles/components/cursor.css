@@ -21,10 +21,11 @@
   opacity: 1;
 }
 
+
 .custom-cursor.has-label {
   width: auto;
   height: auto;
-  padding: 4px 8px;
+  padding: 4px 8px 4px 12px;
 }
 
 .custom-cursor__icon {
