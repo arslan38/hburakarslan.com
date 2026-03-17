@@ -46,15 +46,15 @@ export function initCursor() {
   document.addEventListener('mouseenter', () => cursor.classList.add('is-visible'), true);
   document.addEventListener('mouseleave', () => cursor.classList.remove('is-visible'));
 
-  // Hide cursor on header name
+  // Hide cursor on header name and clock
   document.addEventListener('mouseover', (e) => {
-    if (e.target.closest('.site-header__name')) {
+    if (e.target.closest('.site-header__name') || e.target.closest('.site-header__clock-wrapper')) {
       animate(cursor, { opacity: 0, scale: 0.8 }, { duration: 0.2, easing: [0.4, 0, 1, 1] });
     }
   });
 
   document.addEventListener('mouseout', (e) => {
-    if (e.target.closest('.site-header__name')) {
+    if (e.target.closest('.site-header__name') || e.target.closest('.site-header__clock-wrapper')) {
       animate(cursor, { opacity: 1, scale: 1 }, { duration: 0.25, easing: [0, 0, 0.2, 1] });
     }
   });
