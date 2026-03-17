@@ -24,3 +24,12 @@ main > footer {
   animation: fadeInUp 0.5s ease-out forwards;
   animation-delay: 0.8s;
 }
+
+.sorbi-link {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-family: 'Nunito', sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}

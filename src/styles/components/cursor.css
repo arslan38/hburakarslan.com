@@ -1,0 +1,35 @@
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  margin-left: -14px;
+  margin-top: -14px;
+  border: 1.5px solid var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.custom-cursor.is-visible {
+  opacity: 1;
+}
+
+.custom-cursor__icon {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  line-height: 1;
+  color: var(--color-text);
+  user-select: none;
+}
+
+@media (pointer: coarse) {
+  .custom-cursor {
+    display: none;
+  }
+}
