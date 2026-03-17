@@ -9,6 +9,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+p {
+  text-align: justify;
+}
+
 p + p {
   margin-top: 1.1em;
 }
@@ -16,6 +20,7 @@ p + p {
 em {
   font-family: 'Swanky and Moo Moo', cursive;
   font-style: normal;
+  font-weight: 700;
   font-size: 1.5em;
   line-height: 0;
   vertical-align: baseline;

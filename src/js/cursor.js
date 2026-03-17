@@ -11,10 +11,11 @@ export function initCursor() {
 
   const cursor = document.createElement('div');
   cursor.className = 'custom-cursor';
-  cursor.innerHTML = '<span class="custom-cursor__icon"></span><span class="custom-cursor__label"></span>';
+  cursor.innerHTML = '<span class="custom-cursor__icon"></span><img class="custom-cursor__sorbi" src="/assets/svg/sorbi.svg" alt=""><span class="custom-cursor__label"></span>';
   document.body.appendChild(cursor);
 
   const icon = cursor.querySelector('.custom-cursor__icon');
+  const sorbiImg = cursor.querySelector('.custom-cursor__sorbi');
   const label = cursor.querySelector('.custom-cursor__label');
 
   let mouseX = -100;
@@ -45,6 +46,14 @@ export function initCursor() {
 
   document.addEventListener('mouseenter', () => cursor.classList.add('is-visible'), true);
   document.addEventListener('mouseleave', () => cursor.classList.remove('is-visible'));
+
+  // Hide cursor while selecting text
+  document.addEventListener('mousedown', () => {
+    cursor.classList.add('is-selecting');
+  });
+  document.addEventListener('mouseup', () => {
+    cursor.classList.remove('is-selecting');
+  });
 
   // Hide cursor on header name and clock
   document.addEventListener('mouseover', (e) => {
@@ -138,56 +147,104 @@ export function initCursor() {
     animate(cursor, { opacity: 1 }, { duration: 0.01 });
   };
 
-  // Contact link label interaction
+  // Contact link / Sorbi link label interaction
   document.addEventListener('mouseover', (e) => {
-    const link = e.target.closest('[data-cursor-label]');
+    const link = e.target.closest('[data-cursor-label]') || e.target.closest('.sorbi-link');
     if (!link || labelActive) return;
     labelActive = true;
 
-    const text = link.dataset.cursorLabel;
+    const isSorbi = link.classList.contains('sorbi-link');
+    const text = isSorbi ? 'siteye git ↗' : link.dataset.cursorLabel;
     label.textContent = text;
 
     cursor.classList.add('has-label');
+    if (isSorbi) cursor.classList.add('is-sorbi');
 
     animate(icon, {
       opacity: [1, 0],
-      scale: [1, 0.5],
+      scale: [1, 0.85],
+      filter: ['blur(0px)', 'blur(2px)'],
     }, {
-      duration: 0.2,
+      duration: 0.12,
       easing: [0.4, 0, 1, 1],
     });
 
+    if (isSorbi) {
+      animate(sorbiImg, {
+        opacity: [0, 1],
+        scale: [0.85, 1],
+        filter: ['blur(2px)', 'blur(0px)'],
+      }, {
+        duration: 0.15,
+        easing: [0, 0, 0.2, 1],
+        delay: 0.04,
+      });
+    }
+
     animate(label, {
       opacity: [0, 1],
+      filter: ['blur(2px)', 'blur(0px)'],
     }, {
-      duration: 0.25,
+      duration: 0.15,
       easing: [0, 0, 0.2, 1],
-      delay: 0.1,
+      delay: 0.06,
     });
   });
 
   document.addEventListener('mouseout', (e) => {
-    if (!e.target.closest('[data-cursor-label]') || !labelActive) return;
+    const link = e.target.closest('[data-cursor-label]') || e.target.closest('.sorbi-link');
+    if (!link || !labelActive) return;
     labelActive = false;
 
-    // 1. Fade out label quickly
+    const isSorbi = cursor.classList.contains('is-sorbi');
+
+    // Capture expanded size, then remove classes and animate shrink
+    const fromW = cursor.offsetWidth + 'px';
+    const fromH = cursor.offsetHeight + 'px';
+    const fromP = getComputedStyle(cursor).padding;
+    cursor.classList.remove('has-label');
+    if (isSorbi) cursor.classList.remove('is-sorbi');
+
+    animate(cursor, {
+      width: [fromW, '22px'],
+      height: [fromH, '22px'],
+      padding: [fromP, '0px'],
+    }, {
+      duration: 0.15,
+      easing: [0.4, 0, 0.2, 1],
+    }).then(() => {
+      cursor.style.width = '';
+      cursor.style.height = '';
+      cursor.style.padding = '';
+    });
+
     animate(label, {
       opacity: [1, 0],
+      filter: ['blur(0px)', 'blur(2px)'],
+    }, {
+      duration: 0.1,
+      easing: [0.4, 0, 1, 1],
+    });
+
+    if (isSorbi) {
+      animate(sorbiImg, {
+        opacity: [1, 0],
+        scale: [1, 0.85],
+        filter: ['blur(0px)', 'blur(2px)'],
+      }, {
+        duration: 0.1,
+        easing: [0.4, 0, 1, 1],
+      });
+    }
+
+    animate(icon, {
+      opacity: [0, 1],
+      scale: [0.85, 1],
+      filter: ['blur(2px)', 'blur(0px)'],
     }, {
       duration: 0.12,
-      easing: [0.4, 0, 1, 1],
-    }).then(() => {
-      // 2. After label is invisible, shrink cursor
-      cursor.classList.remove('has-label');
-
-      // 3. Icon reappears as cursor shrinks
-      animate(icon, {
-        opacity: [0, 1],
-        scale: [0.5, 1],
-      }, {
-        duration: 0.25,
-        easing: [0, 0, 0.2, 1],
-      });
+      easing: [0, 0, 0.2, 1],
+      delay: 0.04,
     });
   });
 }

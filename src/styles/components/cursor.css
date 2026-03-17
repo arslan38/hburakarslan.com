@@ -21,6 +21,10 @@
   opacity: 1;
 }
 
+.custom-cursor.is-selecting {
+  opacity: 0 !important;
+  transition: opacity 0.15s ease;
+}
 
 .custom-cursor.has-label {
   width: auto;
@@ -53,6 +57,24 @@
   width: 100%;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.custom-cursor__sorbi {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  object-fit: cover;
+  opacity: 0;
+  position: absolute;
+}
+
+.custom-cursor.is-sorbi .custom-cursor__sorbi {
+  position: relative;
+}
+
+.custom-cursor.is-sorbi.has-label {
+  padding: 4px 8px 4px 4px;
+  gap: 6px;
 }
 
 .custom-cursor__label {
