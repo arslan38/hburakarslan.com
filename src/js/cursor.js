@@ -130,22 +130,24 @@ export function initCursor() {
     if (!e.target.closest('[data-cursor-label]') || !labelActive) return;
     labelActive = false;
 
+    // 1. Fade out label quickly
     animate(label, {
       opacity: [1, 0],
     }, {
-      duration: 0.15,
+      duration: 0.12,
       easing: [0.4, 0, 1, 1],
-    });
-
-    animate(icon, {
-      opacity: [0, 1],
-      scale: [0.5, 1],
-    }, {
-      duration: 0.25,
-      easing: [0, 0, 0.2, 1],
-      delay: 0.08,
     }).then(() => {
+      // 2. After label is invisible, shrink cursor
       cursor.classList.remove('has-label');
+
+      // 3. Icon reappears as cursor shrinks
+      animate(icon, {
+        opacity: [0, 1],
+        scale: [0.5, 1],
+      }, {
+        duration: 0.25,
+        easing: [0, 0, 0.2, 1],
+      });
     });
   });
 }
