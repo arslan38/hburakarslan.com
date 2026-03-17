@@ -1,10 +1,11 @@
-import { BUBBLE_DATA } from '../data/bubbles.js';
+import { getBubbleData } from '../data/bubbles.js';
 import { initSpeechBubbles } from './speech-bubble.js';
 import { resetCursorState } from './cursor.js';
 import { resetScroll } from './smooth-scroll.js';
 import { resetMenu } from './menu.js';
 import { initScrollReveal, initHeroObserver } from './scroll-reveal.js';
 import { wipeIn, wipeOut } from './transition.js';
+import { applyTranslations } from './i18n.js';
 
 const BUBBLES_ENABLED = false;
 
@@ -24,7 +25,6 @@ async function navigateTo(url, { pushState = true } = {}) {
 
   const newContent = doc.getElementById('page-content');
   const newPage = doc.body.dataset.page;
-  const newTitle = doc.title;
 
   if (!newContent) {
     location.href = url;
@@ -34,10 +34,10 @@ async function navigateTo(url, { pushState = true } = {}) {
   const container = document.getElementById('page-content');
   container.innerHTML = newContent.innerHTML;
   document.body.dataset.page = newPage;
-  document.title = newTitle;
 
   if (pushState) history.pushState(null, '', url);
 
+  applyTranslations();
   resetCursorState();
   resetScroll();
   resetMenu();
@@ -47,7 +47,7 @@ async function navigateTo(url, { pushState = true } = {}) {
 }
 
 function onPageLoad() {
-  initSpeechBubbles(BUBBLE_DATA, { enabled: BUBBLES_ENABLED });
+  initSpeechBubbles(getBubbleData(), { enabled: BUBBLES_ENABLED });
   initScrollReveal();
   initHeroObserver();
 }

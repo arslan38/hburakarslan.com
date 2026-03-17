@@ -1,12 +1,13 @@
 import { animate } from 'motion/mini';
+import { t } from './i18n.js';
 
 const CAPITALS = [
   { name: 'London', tz: 'Europe/London' },
   { name: 'New York', tz: 'America/New_York' },
   { name: 'Tokyo', tz: 'Asia/Tokyo' },
   { name: 'Dubai', tz: 'Asia/Dubai' },
-  { name: 'Moskova', tz: 'Europe/Moscow' },
-  { name: 'Pekin', tz: 'Asia/Shanghai' },
+  { nameKey: 'city.moscow', tz: 'Europe/Moscow' },
+  { nameKey: 'city.beijing', tz: 'Asia/Shanghai' },
   { name: 'Sydney', tz: 'Australia/Sydney' },
   { name: 'São Paulo', tz: 'America/Sao_Paulo' },
 ];
@@ -36,10 +37,14 @@ function renderZones() {
   if (!list) return;
 
   const now = new Date();
-  const sorted = CAPITALS.map(c => ({ ...c, diff: getDiff(now, c.tz) }))
-    .sort((a, b) => a.diff - b.diff);
+  const sorted = CAPITALS.map(c => ({
+    ...c,
+    displayName: c.nameKey ? t(c.nameKey) : c.name,
+    diff: getDiff(now, c.tz),
+  })).sort((a, b) => a.diff - b.diff);
+
   list.innerHTML = sorted.map(c =>
-    `<li><span class="clock-zones__city">${c.name}</span><span class="clock-zones__diff">${diffLabel(now, c.tz)}</span></li>`
+    `<li><span class="clock-zones__city">${c.displayName}</span><span class="clock-zones__diff">${diffLabel(now, c.tz)}</span></li>`
   ).join('');
 }
 
@@ -120,6 +125,17 @@ export function initClock() {
 
   update();
   setInterval(update, 10000);
+
+  // Re-render zones on language change
+  document.addEventListener('langchange', () => {
+    renderZones();
+    if (zonesVisible) {
+      document.querySelectorAll('.clock-zones li').forEach((li) => {
+        li.style.opacity = '1';
+        li.style.transform = 'translateY(0)';
+      });
+    }
+  });
 
   if (wrapper) {
     wrapper.addEventListener('mouseenter', () => {

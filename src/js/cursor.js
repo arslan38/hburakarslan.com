@@ -1,5 +1,6 @@
 import { animate } from 'motion/mini';
 import sorbiSvg from '../assets/svg/sorbi.svg';
+import { t } from './i18n.js';
 
 let resetCursor = null;
 
@@ -155,7 +156,7 @@ export function initCursor() {
     labelActive = true;
 
     const isSorbi = link.classList.contains('sorbi-link');
-    const text = isSorbi ? 'siteye git ↗' : link.dataset.cursorLabel;
+    const text = isSorbi ? t('cursor.sorbi') : link.dataset.cursorLabel;
     label.textContent = text;
 
     cursor.classList.add('has-label');
