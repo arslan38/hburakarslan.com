@@ -8,6 +8,12 @@
   color: var(--color-muted);
 }
 
+[data-page="home"] .copyright {
+  position: static;
+  margin-top: 6rem;
+  margin-bottom: 3rem;
+}
+
 @media (max-width: 600px) {
   .copyright {
     position: static;

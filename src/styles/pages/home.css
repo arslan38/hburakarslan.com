@@ -1,3 +1,70 @@
+/* Hero section */
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  background-color: #8b1a1a;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 6rem 3rem 3rem;
+  box-sizing: border-box;
+  margin-bottom: 14rem;
+}
+
+.hero__marquee {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 2px solid rgba(255,255,255,0.2);
+  padding: 1rem 0;
+}
+
+.hero__marquee-track {
+  display: inline-flex;
+  animation: marquee-scroll 20s linear infinite;
+}
+
+.hero__marquee-item {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0 2rem;
+  font-weight: 700;
+}
+
+.hero__title {
+  font-size: clamp(4.5rem, 12vw, 10rem);
+  color: #fff;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.hero__title span {
+  display: block;
+}
+
+.hero__line--girisimci {
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+}
+
+.hero__line--tasarimci {
+  font-family: 'Syne', sans-serif;
+  font-weight: 777;
+}
+
+.hero__line--hikaye {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+}
+
+/* Home page content styles */
 [data-page="home"] h1 {
   font-size: inherit;
   font-weight: 400;

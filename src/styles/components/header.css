@@ -77,6 +77,16 @@
   color: var(--color-muted);
 }
 
+.site-header--hero-visible {
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.site-header--hero-visible .site-header__label,
+.site-header--hero-visible .clock-zones__city {
+  color: rgba(255, 255, 255, 0.7);
+}
+
 @media (max-width: 600px) {
   .site-header {
     position: relative;

@@ -18,4 +18,16 @@ if (document.body.dataset.page === 'home') {
   import('./signature-animation.js').then(({ initSignatureAnimation }) => {
     initSignatureAnimation();
   });
+
+  const hero = document.querySelector('.hero');
+  const header = document.querySelector('.site-header');
+  if (hero && header) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        header.classList.toggle('site-header--hero-visible', entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+    observer.observe(hero);
+  }
 }
