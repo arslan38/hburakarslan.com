@@ -84,10 +84,6 @@ export const translations = {
   // Cursor labels
   'cursor.sorbi': { tr: 'siteye git ↗', en: 'go to site ↗' },
 
-  // Clock city names
-  'city.moscow': { tr: 'Moskova', en: 'Moscow' },
-  'city.beijing': { tr: 'Pekin', en: 'Beijing' },
-
   // Bubble data (only Turkish text ones)
   'bubble.hikaye': { tr: 'Her insan ölür ama herkes gerçekten yaşamaz.', en: 'Everyone dies, but not everyone really lives.' },
   'bubble.urun': { tr: 'İlk ürünüm 14 yaşında yaptığım bir Android uygulamasıydı.', en: 'My first product was an Android app I built at age 14.' },
