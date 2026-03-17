@@ -1,6 +1,8 @@
 import { BUBBLE_DATA } from '../data/bubbles.js';
 import { initSpeechBubbles } from './speech-bubble.js';
 import { resetCursorState } from './cursor.js';
+import { resetScroll } from './smooth-scroll.js';
+import { initScrollReveal, initHeroObserver } from './scroll-reveal.js';
 
 const BUBBLES_ENABLED = false;
 
@@ -34,17 +36,14 @@ async function navigateTo(url) {
   history.pushState(null, '', url);
 
   resetCursorState();
+  resetScroll();
   onPageLoad();
 }
 
 function onPageLoad() {
   initSpeechBubbles(BUBBLE_DATA, { enabled: BUBBLES_ENABLED });
-
-  if (document.body.dataset.page === 'home') {
-    import('./signature-animation.js').then(({ initSignatureAnimation }) => {
-      initSignatureAnimation();
-    });
-  }
+  initScrollReveal();
+  initHeroObserver();
 }
 
 export function initRouter() {

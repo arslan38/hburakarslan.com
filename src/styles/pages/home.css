@@ -5,7 +5,7 @@
   min-height: 100vh;
   display: flex;
   align-items: flex-start;
-  background-color: #8b1a1a;
+  background-color: var(--color-accent);
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   padding: 6rem 3rem 3rem;
@@ -26,7 +26,8 @@
 
 .hero__marquee-track {
   display: inline-flex;
-  animation: marquee-scroll 20s linear infinite;
+  min-width: 200%;
+  animation: marquee-scroll 30s linear infinite;
 }
 
 .hero__marquee-item {
@@ -82,28 +83,22 @@
 }
 
 main > h1,
-main > p {
-  opacity: 0;
-  animation: fadeInUp 0.5s ease-out forwards;
-}
-
-main > h1 { animation-delay: 0.1s; }
-main > p:nth-of-type(1) { animation-delay: 0.2s; }
-main > p:nth-of-type(2) { animation-delay: 0.3s; }
-main > p:nth-of-type(3) { animation-delay: 0.4s; }
-main > p:nth-of-type(4) { animation-delay: 0.5s; }
-main > p:nth-of-type(5) { animation-delay: 0.6s; }
-main > p:nth-of-type(6) { animation-delay: 0.7s; }
-
+main > p,
 main > nav,
 main > footer {
   opacity: 0;
+  transform: translateY(8px);
+}
+
+main > h1.in-view,
+main > p.in-view,
+main > nav.in-view,
+main > footer.in-view {
   animation: fadeInUp 0.5s ease-out forwards;
-  animation-delay: 0.8s;
 }
 
 .sorbi-link {
-  color: var(--color-accent);
+  color: #1FA4FF;
   text-decoration: none;
   font-family: 'Nunito', sans-serif;
   text-transform: uppercase;

@@ -18,6 +18,13 @@ function renderBubbleContent(data) {
   }
 }
 
+export function triggerGlowHints() {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('em[data-bubble]').forEach((em, i) => {
+    setTimeout(() => em.classList.add('glow-hint'), i * 80);
+  });
+}
+
 export function initSpeechBubbles(bubbleData, { enabled = false } = {}) {
   const bubble = document.getElementById('speech-bubble');
   if (!bubble) return;
@@ -139,14 +146,7 @@ export function initSpeechBubbles(bubbleData, { enabled = false } = {}) {
     }, 80);
   }
 
-  // Glow hint (always runs)
-  if (!reducedMotion) {
-    setTimeout(() => {
-      document.querySelectorAll('em[data-bubble]').forEach((em, i) => {
-        setTimeout(() => em.classList.add('glow-hint'), i * 80);
-      });
-    }, 1500);
-  }
+  // Glow hint — triggered externally via triggerGlowHints() after scroll reveal
 
   // Event binding (only when enabled)
   if (!enabled) return;

@@ -5,10 +5,10 @@
   --color-text:    #242323;
   --color-muted:   #aaa;
   --color-subtle:  #888;
-  --color-accent:  #1FA4FF;
+  --color-accent:  #8b1a1a;
 
   /* Semantic aliases */
   --color-link:         var(--color-text);
   --color-link-hover:   var(--color-bg);
-  --color-link-hover-bg: var(--color-text);
+  --color-link-hover-bg: var(--color-accent);
 }
