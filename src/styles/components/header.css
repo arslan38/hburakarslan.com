@@ -54,7 +54,6 @@
   flex-direction: column;
   margin-top: 0.35em;
   gap: 0;
-  transition: opacity 0.25s ease;
 }
 
 /* Hero'dayken nav gizle */
@@ -62,6 +61,7 @@
   opacity: 0;
   pointer-events: none;
 }
+
 
 /* Nav linkleri */
 .site-header__nav a {
@@ -91,12 +91,6 @@
   transform: none;
 }
 
-/* Mevcut sayfayı menüde gizle */
-[data-page="home"] .site-header__nav [data-nav="home"],
-[data-page="projeler"] .site-header__nav [data-nav="projeler"],
-[data-page="iletisim"] .site-header__nav [data-nav="iletisim"] {
-  display: none;
-}
 
 .site-header__clock-wrapper {
   display: flex;

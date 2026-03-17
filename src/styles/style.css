@@ -9,6 +9,7 @@
 @import './components/copyright.css';
 @import './components/cursor.css';
 @import './components/header.css';
+@import './components/transition.css';
 
 @import './layouts/main-layout.css';
 @import './layouts/projects-layout.css';

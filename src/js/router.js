@@ -4,20 +4,22 @@ import { resetCursorState } from './cursor.js';
 import { resetScroll } from './smooth-scroll.js';
 import { resetMenu } from './menu.js';
 import { initScrollReveal, initHeroObserver } from './scroll-reveal.js';
+import { wipeIn, wipeOut } from './transition.js';
 
 const BUBBLES_ENABLED = false;
 
-function isInternalLink(el) {
-  if (!el || !el.href) return false;
-  if (el.target === '_blank') return false;
-  if (el.origin !== location.origin) return false;
-  if (el.pathname === location.pathname) return false;
-  return true;
+function isHomePage(url) {
+  const { pathname } = new URL(url, location.origin);
+  return pathname === '/' || pathname === '/index.html';
 }
 
-async function navigateTo(url) {
-  const res = await fetch(url);
-  const html = await res.text();
+async function navigateTo(url, { pushState = true } = {}) {
+  const useWipe = isHomePage(url);
+  const fetchPromise = fetch(url).then((r) => r.text());
+
+  if (useWipe) await wipeIn();
+
+  const html = await fetchPromise;
   const doc = new DOMParser().parseFromString(html, 'text/html');
 
   const newContent = doc.getElementById('page-content');
@@ -34,12 +36,14 @@ async function navigateTo(url) {
   document.body.dataset.page = newPage;
   document.title = newTitle;
 
-  history.pushState(null, '', url);
+  if (pushState) history.pushState(null, '', url);
 
   resetCursorState();
   resetScroll();
   resetMenu();
   onPageLoad();
+
+  if (useWipe) await wipeOut();
 }
 
 function onPageLoad() {
@@ -51,13 +55,20 @@ function onPageLoad() {
 export function initRouter() {
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a');
-    if (!isInternalLink(link)) return;
+    if (!link || !link.href || link.target === '_blank') return;
+    if (link.origin !== location.origin) return;
+
+    if (link.pathname === location.pathname || (isHomePage(link.href) && isHomePage(location.href))) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
 
     e.preventDefault();
     navigateTo(link.href);
   });
 
   window.addEventListener('popstate', () => {
-    navigateTo(location.href);
+    navigateTo(location.href, { pushState: false });
   });
 }

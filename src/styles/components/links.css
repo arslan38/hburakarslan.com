@@ -21,8 +21,6 @@ footer .links {
   color: var(--color-link);
   text-decoration: underline;
   position: relative;
-  padding: 0.15em 0.35em;
-  margin: -0.15em -0.35em;
   transition: color 0.25s ease, background-color 0.25s ease;
 }
 
@@ -34,6 +32,7 @@ footer .links {
 .links a:hover {
   background-color: var(--color-link-hover-bg);
   color: var(--color-link-hover);
+  text-decoration: none;
 }
 
 .links a:hover .arrow {

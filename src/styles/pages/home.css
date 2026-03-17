@@ -11,6 +11,7 @@
   padding: 6rem 3rem 3rem;
   box-sizing: border-box;
   margin-bottom: 14rem;
+  user-select: none;
 }
 
 .hero__marquee {
