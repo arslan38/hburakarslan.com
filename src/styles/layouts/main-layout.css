@@ -25,6 +25,10 @@ main {
     font-size: 0.85rem;
   }
 
+  #page-content {
+    align-items: flex-start;
+  }
+
   footer {
     flex-direction: column-reverse;
     align-items: flex-end;

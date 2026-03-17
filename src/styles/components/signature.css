@@ -13,3 +13,9 @@
   stroke: var(--color-text);
   fill: none;
 }
+
+@media (max-width: 600px) {
+  .signature {
+    margin-bottom: 3rem;
+  }
+}

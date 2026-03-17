@@ -7,3 +7,10 @@
   font-size: 0.75em;
   color: var(--color-muted);
 }
+
+@media (max-width: 600px) {
+  .copyright {
+    position: static;
+    margin-top: 2rem;
+  }
+}

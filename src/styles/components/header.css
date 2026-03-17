@@ -47,3 +47,13 @@
   font-size: 0.75em;
   color: var(--color-muted);
 }
+
+@media (max-width: 600px) {
+  .site-header {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: 2rem;
+  }
+}
