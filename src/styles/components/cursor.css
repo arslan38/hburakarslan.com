@@ -14,7 +14,7 @@
   pointer-events: none;
   z-index: 9999;
   opacity: 0;
-  transition: opacity 0.3s ease, width 0.3s cubic-bezier(0, 0, 0.2, 1), height 0.3s cubic-bezier(0, 0, 0.2, 1), padding 0.3s cubic-bezier(0, 0, 0.2, 1);
+  transition: width 0.3s cubic-bezier(0, 0, 0.2, 1), height 0.3s cubic-bezier(0, 0, 0.2, 1), padding 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .custom-cursor.is-visible {
