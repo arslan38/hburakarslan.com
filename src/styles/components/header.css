@@ -1,0 +1,11 @@
+.site-header {
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: inherit;
+  color: var(--color-muted);
+  z-index: 100;
+}

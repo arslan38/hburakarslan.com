@@ -8,6 +8,7 @@
 @import './components/signature.css';
 @import './components/copyright.css';
 @import './components/cursor.css';
+@import './components/header.css';
 
 @import './layouts/main-layout.css';
 @import './layouts/projects-layout.css';
