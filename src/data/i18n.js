@@ -83,6 +83,7 @@ export const translations = {
 
   // Cursor labels
   'cursor.sorbi': { tr: 'siteye git ↗', en: 'go to site ↗' },
+  'cursor.lang': { tr: 'translate to english', en: 'türkçeye çevir' },
 
   // Bubble data (only Turkish text ones)
   'bubble.hikaye': { tr: 'Her insan ölür ama herkes gerçekten yaşamaz.', en: 'Everyone dies, but not everyone really lives.' },
