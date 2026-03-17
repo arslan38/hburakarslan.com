@@ -44,8 +44,10 @@ function renderZones() {
 }
 
 let hideAnimation = null;
+let zonesVisible = false;
 
 function showZones() {
+  zonesVisible = true;
   if (hideAnimation) { hideAnimation.cancel(); hideAnimation = null; }
   const items = document.querySelectorAll('.clock-zones li');
   if (!items.length) return;
@@ -59,6 +61,7 @@ function showZones() {
 }
 
 function hideZones() {
+  zonesVisible = false;
   const items = document.querySelectorAll('.clock-zones li');
   if (!items.length) return;
   const last = items.length - 1;
@@ -70,6 +73,25 @@ function hideZones() {
     });
     if (i === 0) hideAnimation = anim;
   });
+}
+
+let inverted = false;
+
+function hideZonesImmediate() {
+  zonesVisible = false;
+  if (hideAnimation) { hideAnimation.cancel(); hideAnimation = null; }
+  const items = document.querySelectorAll('.clock-zones li');
+  items.forEach((li) => {
+    li.style.opacity = '0';
+    li.style.transform = 'translateY(6px)';
+  });
+}
+
+export function setClockInverted(value) {
+  const wasInverted = inverted;
+  inverted = value;
+  if (value && !wasInverted) showZones();
+  if (!value && wasInverted) hideZonesImmediate();
 }
 
 export function initClock() {
@@ -88,13 +110,23 @@ export function initClock() {
     });
     el.textContent = `IST ${time}`;
     renderZones();
+    if (zonesVisible) {
+      document.querySelectorAll('.clock-zones li').forEach((li) => {
+        li.style.opacity = '1';
+        li.style.transform = 'translateY(0)';
+      });
+    }
   }
 
   update();
   setInterval(update, 10000);
 
   if (wrapper) {
-    wrapper.addEventListener('mouseenter', showZones);
-    wrapper.addEventListener('mouseleave', hideZones);
+    wrapper.addEventListener('mouseenter', () => {
+      if (inverted) hideZones(); else showZones();
+    });
+    wrapper.addEventListener('mouseleave', () => {
+      if (inverted) showZones(); else hideZones();
+    });
   }
 }

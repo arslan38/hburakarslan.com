@@ -55,15 +55,15 @@ export function initCursor() {
     cursor.classList.remove('is-selecting');
   });
 
-  // Hide cursor on header name and clock
+  // Hide cursor on header name, clock, and nav
   document.addEventListener('mouseover', (e) => {
-    if (e.target.closest('.site-header__name') || e.target.closest('.site-header__clock-wrapper')) {
+    if (e.target.closest('.site-header__name') || e.target.closest('.site-header__clock-wrapper') || e.target.closest('.site-header__nav')) {
       animate(cursor, { opacity: 0, scale: 0.8 }, { duration: 0.2, easing: [0.4, 0, 1, 1] });
     }
   });
 
   document.addEventListener('mouseout', (e) => {
-    if (e.target.closest('.site-header__name') || e.target.closest('.site-header__clock-wrapper')) {
+    if (e.target.closest('.site-header__name') || e.target.closest('.site-header__clock-wrapper') || e.target.closest('.site-header__nav')) {
       animate(cursor, { opacity: 1, scale: 1 }, { duration: 0.25, easing: [0, 0, 0.2, 1] });
     }
   });

@@ -1,3 +1,81 @@
+/* Hero section */
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  background-color: var(--color-accent);
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 6rem 3rem 3rem;
+  box-sizing: border-box;
+  margin-bottom: 14rem;
+}
+
+.hero__marquee {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 2px solid rgba(255,255,255,0.2);
+  padding: 1rem 0;
+}
+
+.hero__marquee-track {
+  display: inline-flex;
+  min-width: 200%;
+  animation: marquee-scroll 30s linear infinite;
+}
+
+.hero__marquee-item {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0 1.2rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.hero__marquee-item .arrow-icon {
+  font-size: 1.3em;
+  line-height: 1;
+  position: relative;
+  top: -0.1em;
+}
+
+.hero__title {
+  font-size: clamp(4.5rem, 12vw, 10rem);
+  color: #fff;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.hero__title span {
+  display: block;
+}
+
+.hero__line--girisimci {
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+}
+
+.hero__line--tasarimci {
+  font-family: 'Syne', sans-serif;
+  font-weight: 777;
+}
+
+.hero__line--hikaye {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+}
+
+/* Home page content styles */
 [data-page="home"] h1 {
   font-size: inherit;
   font-weight: 400;
@@ -5,28 +83,22 @@
 }
 
 main > h1,
-main > p {
-  opacity: 0;
-  animation: fadeInUp 0.5s ease-out forwards;
-}
-
-main > h1 { animation-delay: 0.1s; }
-main > p:nth-of-type(1) { animation-delay: 0.2s; }
-main > p:nth-of-type(2) { animation-delay: 0.3s; }
-main > p:nth-of-type(3) { animation-delay: 0.4s; }
-main > p:nth-of-type(4) { animation-delay: 0.5s; }
-main > p:nth-of-type(5) { animation-delay: 0.6s; }
-main > p:nth-of-type(6) { animation-delay: 0.7s; }
-
+main > p,
 main > nav,
 main > footer {
   opacity: 0;
+  transform: translateY(8px);
+}
+
+main > h1.in-view,
+main > p.in-view,
+main > nav.in-view,
+main > footer.in-view {
   animation: fadeInUp 0.5s ease-out forwards;
-  animation-delay: 0.8s;
 }
 
 .sorbi-link {
-  color: var(--color-accent);
+  color: #1FA4FF;
   text-decoration: none;
   font-family: 'Nunito', sans-serif;
   text-transform: uppercase;

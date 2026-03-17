@@ -3,6 +3,9 @@ import { initSpeechBubbles } from './speech-bubble.js';
 import { initCursor } from './cursor.js';
 import { initClock } from './clock.js';
 import { initRouter } from './router.js';
+import { initSmoothScroll } from './smooth-scroll.js';
+import { initScrollReveal, initHeroObserver } from './scroll-reveal.js';
+import { initMenu } from './menu.js';
 
 const BUBBLES_ENABLED = false;
 
@@ -10,12 +13,10 @@ const BUBBLES_ENABLED = false;
 initCursor();
 initClock();
 initRouter();
+initSmoothScroll();
+initMenu();
 
 // Page-specific (run on initial load)
 initSpeechBubbles(BUBBLE_DATA, { enabled: BUBBLES_ENABLED });
-
-if (document.body.dataset.page === 'home') {
-  import('./signature-animation.js').then(({ initSignatureAnimation }) => {
-    initSignatureAnimation();
-  });
-}
+initScrollReveal();
+initHeroObserver();
