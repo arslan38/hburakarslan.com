@@ -179,9 +179,8 @@
     display: none;
   }
 
-  /* Saat ve dil butonunu mobilde gizle */
+  /* Saat ve hamburger'ı mobilde gizle */
   .site-header__clock-wrapper { display: none; }
-  .site-header__lang { display: none !important; }
   .site-header__hamburger { display: none; }
 
   /* Hero-visible nav gizleme: mobilde override et */
@@ -193,8 +192,8 @@
   /* Sol taraf: dikey yerleşim, nav ismin altında */
   .site-header__left {
     flex-direction: column;
+    flex: 1;
     gap: 0.5rem;
-    width: 100%;
   }
 
   /* Nav her zaman görünür, yatay */
@@ -207,8 +206,30 @@
   .site-header__nav a { color: rgba(255,255,255,0.7); }
   .site-header__nav a:hover { background-color: rgba(255,255,255,0.15); color: #fff; }
 
-  /* İsim hover slide devre dışı */
+  /* İsim tamamen sabit — slide, transition, hover hepsi devre dışı */
   .site-header__name { overflow: visible; color: #fff; }
   .site-header__name-alt { display: none; }
+  .site-header__name-slide { transition: none; }
   .site-header__name:hover .site-header__name-slide { transform: none; }
+
+  /* Dil toggle: kısa "EN" / "TR" olarak göster */
+  .site-header__lang {
+    display: block !important;
+    position: static;
+    left: auto;
+    transform: none;
+    top: auto;
+    font-size: 0;
+    color: rgba(255,255,255,0.7);
+    align-self: flex-start;
+    padding: 0.3em 0.5em;
+  }
+  .site-header__lang:hover { color: #fff; }
+  .site-header__lang::after {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  html[lang="tr"] .site-header__lang::after { content: "EN"; }
+  html[lang="en"] .site-header__lang::after { content: "TR"; }
 }
