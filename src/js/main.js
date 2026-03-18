@@ -22,12 +22,6 @@ initMenu();
 initTransition();
 initHamburger();
 
-// Home page'de ilk yüklemede theme-color'ı hemen kırmızıya çevir
-if (document.body.dataset.page === 'home') {
-  const meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute('content', getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim());
-}
-
 // Page-specific (run on initial load)
 initSpeechBubbles(getBubbleData(), { enabled: BUBBLES_ENABLED });
 initScrollReveal();
