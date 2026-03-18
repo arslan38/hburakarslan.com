@@ -3,7 +3,7 @@ import { translations } from '../data/i18n.js';
 const STORAGE_KEY = 'lang';
 
 export function getLang() {
-  return localStorage.getItem(STORAGE_KEY) || 'tr';
+  return localStorage.getItem(STORAGE_KEY) || 'en';
 }
 
 export function setLang(lang) {
@@ -14,7 +14,7 @@ export function setLang(lang) {
 export function t(key) {
   const entry = translations[key];
   if (!entry) return key;
-  return entry[getLang()] ?? entry.tr;
+  return entry[getLang()] ?? entry.en;
 }
 
 export function applyTranslations() {
