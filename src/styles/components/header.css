@@ -206,11 +206,13 @@
   .site-header__nav a { color: rgba(255,255,255,0.7); }
   .site-header__nav a:hover { background-color: rgba(255,255,255,0.15); color: #fff; }
 
-  /* İsim tamamen sabit — slide, transition, hover hepsi devre dışı */
-  .site-header__name { overflow: visible; color: #fff; }
-  .site-header__name-alt { display: none; }
-  .site-header__name-slide { transition: none; }
-  .site-header__name:hover .site-header__name-slide { transform: none; }
+  /* İsim tamamen sabit — slide mekanizması komple devre dışı */
+  .site-header__name { overflow: visible; color: #fff; height: auto; }
+  .site-header__name-alt { display: none !important; }
+  .site-header__name-slide {
+    transition: none !important;
+    transform: none !important;
+  }
 
   /* Dil toggle: kısa "EN" / "TR" olarak göster */
   .site-header__lang {
