@@ -49,15 +49,23 @@ export function initScrollReveal() {
   }
 }
 
+function updateThemeColor(color) {
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', color);
+}
+
 export function initHeroObserver() {
   const hero = document.querySelector('.hero');
   const header = document.querySelector('.site-header');
   if (!hero || !header) return;
 
+  const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim();
+
   const observer = new IntersectionObserver(
     ([entry]) => {
       header.classList.toggle('site-header--hero-visible', entry.isIntersecting);
       setClockInverted(entry.isIntersecting);
+      updateThemeColor(entry.isIntersecting ? accentColor : '#ffffff');
     },
     { threshold: 0 }
   );

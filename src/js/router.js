@@ -43,6 +43,11 @@ async function navigateTo(url, { pushState = true } = {}) {
   resetScroll();
   resetMenu();
   closeHamburger();
+
+  // Sayfa geçişinde theme-color'ı sıfırla (hero observer gerekirse kırmızıya çevirir)
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  if (themeMeta) themeMeta.setAttribute('content', '#ffffff');
+
   onPageLoad();
 
   if (useWipe) await wipeOut();
