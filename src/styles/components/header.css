@@ -211,8 +211,8 @@
   .site-header__nav a { color: rgba(255,255,255,0.7); }
   .site-header__nav a:hover { background-color: rgba(255,255,255,0.15); color: #fff; }
 
-  /* İsim tamamen sabit — slide mekanizması komple devre dışı */
-  .site-header__name { overflow: visible; color: #fff; height: auto; }
+  /* İsim tamamen sabit — slide mekanizması komple devre dışı, link devre dışı */
+  .site-header__name { overflow: visible; color: #fff; height: auto; pointer-events: none; }
   .site-header__name-alt { display: none !important; }
   .site-header__name-slide {
     transition: none !important;
