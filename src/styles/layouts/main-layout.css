@@ -65,6 +65,14 @@ main {
     text-align: left;
   }
 
+  main {
+    margin-top: 1.5rem;
+  }
+
+  [data-page="home"] main {
+    margin-top: 0;
+  }
+
   #page-content {
     align-items: flex-start;
   }
