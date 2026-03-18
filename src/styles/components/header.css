@@ -175,6 +175,11 @@
     color: #fff;
   }
 
+  /* Home page body padding:0 olduğu için negatif margin gerekmez */
+  [data-page="home"] .site-header {
+    margin: 0;
+  }
+
   .clock-zones {
     display: none;
   }
