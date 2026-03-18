@@ -6,6 +6,7 @@ import { resetMenu } from './menu.js';
 import { initScrollReveal, initHeroObserver } from './scroll-reveal.js';
 import { wipeIn, wipeOut } from './transition.js';
 import { applyTranslations } from './i18n.js';
+import { closeHamburger } from './hamburger.js';
 
 const BUBBLES_ENABLED = false;
 
@@ -41,6 +42,7 @@ async function navigateTo(url, { pushState = true } = {}) {
   resetCursorState();
   resetScroll();
   resetMenu();
+  closeHamburger();
   onPageLoad();
 
   if (useWipe) await wipeOut();

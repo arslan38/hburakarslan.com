@@ -8,6 +8,7 @@ import { initScrollReveal, initHeroObserver } from './scroll-reveal.js';
 import { initMenu } from './menu.js';
 import { initTransition } from './transition.js';
 import { initI18n } from './i18n.js';
+import { initHamburger } from './hamburger.js';
 
 const BUBBLES_ENABLED = false;
 
@@ -19,6 +20,7 @@ initRouter();
 initSmoothScroll();
 initMenu();
 initTransition();
+initHamburger();
 
 // Page-specific (run on initial load)
 initSpeechBubbles(getBubbleData(), { enabled: BUBBLES_ENABLED });

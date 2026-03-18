@@ -1,5 +1,6 @@
 .signature {
   line-height: 1;
+  pointer-events: none;
 }
 
 .signature-svg {
@@ -18,5 +19,9 @@
 @media (max-width: 600px) {
   .signature {
     margin-bottom: 3rem;
+  }
+
+  .signature-svg {
+    height: 5rem;
   }
 }

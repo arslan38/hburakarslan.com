@@ -158,16 +158,57 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
+/* Hamburger - gizli (masaüstü) */
+.site-header__hamburger { display: none; }
+
 @media (max-width: 600px) {
   .site-header {
     position: relative;
     top: 0;
     left: 0;
     right: 0;
-    margin-bottom: 2rem;
+    margin-bottom: 0;
+    flex-wrap: wrap;
+    padding: 1rem;
+    gap: 0;
+    background-color: var(--color-accent);
+    color: #fff;
   }
 
   .clock-zones {
     display: none;
   }
+
+  /* Saat ve dil butonunu mobilde gizle */
+  .site-header__clock-wrapper { display: none; }
+  .site-header__lang { display: none !important; }
+  .site-header__hamburger { display: none; }
+
+  /* Hero-visible nav gizleme: mobilde override et */
+  .site-header--hero-visible .site-header__nav {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Sol taraf: dikey yerleşim, nav ismin altında */
+  .site-header__left {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  /* Nav her zaman görünür, yatay */
+  .site-header__nav {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    margin-top: 0;
+  }
+  .site-header__nav a { color: rgba(255,255,255,0.7); }
+  .site-header__nav a:hover { background-color: rgba(255,255,255,0.15); color: #fff; }
+
+  /* İsim hover slide devre dışı */
+  .site-header__name { overflow: visible; color: #fff; }
+  .site-header__name-alt { display: none; }
+  .site-header__name:hover .site-header__name-slide { transform: none; }
 }

@@ -54,6 +54,15 @@ main {
 @media (max-width: 600px) {
   body {
     font-size: 0.85rem;
+    padding: 1rem;
+  }
+
+  [data-page="home"] main {
+    padding: 0 1rem 1.5rem;
+  }
+
+  p {
+    text-align: left;
   }
 
   #page-content {

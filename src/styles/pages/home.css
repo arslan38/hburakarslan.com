@@ -106,3 +106,13 @@ main > footer.in-view {
   font-weight: 700;
   letter-spacing: 0.05em;
 }
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 3rem 1.5rem 2rem;
+    margin-bottom: 4rem;
+    min-height: 70vh;
+  }
+  .hero__title { font-size: clamp(2.5rem, 10vw, 4.5rem); }
+  .hero__marquee-item { font-size: clamp(1rem, 4vw, 1.5rem); }
+}
