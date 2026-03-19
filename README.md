@@ -2,7 +2,7 @@
 
 Kişisel web sitem. Benim tarafımdan tasarlandı, Claude tarafından Vite + vanilla JS/CSS ile yazıldı.
 
-Canlı: [hburakarslan.com](https://hburakarslan.com)
+Canlı: [hburakarslan.com](https://hburakarslan.com) - [hburak.com](https://hburak.com)
 
 ## Geliştirme
 
