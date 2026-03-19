@@ -1,4 +1,4 @@
-# hburakarslan.com
+# hburakarslan.com - redirected to hburak.com
 
 Kişisel web sitem. Benim tarafımdan tasarlandı, Claude tarafından Vite + vanilla JS/CSS ile yazıldı.
 
